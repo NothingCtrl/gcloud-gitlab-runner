@@ -1,0 +1,14 @@
+version: "2"
+
+services:
+    gcloud-gitlab-runner:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        restart: always
+        container_name: gcloud-gitlab-runner
+        command: /scripts/init_script.sh
+        volumes:
+            - ./data/gitlab-runner:/etc/gitlab-runner
+            - ./data/scripts:/scripts
+            #- ./data/service_keys:/service_keys
