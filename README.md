@@ -6,9 +6,10 @@ A docker image with `gitlab-runner`, `gcloud` and `kubeclt`, this image can use 
 
 * with `docker`:
   * Build image: `docker build --tag local/gloud-gitlab-runner .`
-  * Run container `docker run --name gcloud-gitlab-runner local/gloud-gitlab-runner`
-* with `docker-compose` with custom script in `data/scripts/init_script.sh`:
-  * Run container: `docker-compose up --build -d`
+  * Run container `docker run -d -v $(pwd)/data/gitlab-runner:/etc/gitlab-runner -v $(pwd)/data/scripts:/scripts --name gcloud-gitlab-runner --restart=always local/gcloud-gitlab-runner /scripts/init_script.sh`
+* or with `docker-compose`: `docker-compose up --build -d`
+
+Both command with overwrite default CMD with custom script `init_script.sh` mount from host
 
 * Login and register runner with gitlab: 
   ```
